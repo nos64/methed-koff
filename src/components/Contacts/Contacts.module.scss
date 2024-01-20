@@ -1,0 +1,25 @@
+@import './Contacts.vars.scss';
+.phone {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.list {
+  display: flex;
+  gap: 8px;
+}
+
+.link {
+  &:hover,
+  &:active {
+    color: $contacts-link-outline-color;
+  }
+
+  &:focus-visible {
+    color: $contacts-link-outline-color;
+    outline-color: $contacts-link-outline-color;
+  }
+}
+
+//second lesson 1:11

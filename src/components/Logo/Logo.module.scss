@@ -1,0 +1,13 @@
+@import './Logo.vars.scss';
+
+.link {
+  border-radius: 4px;
+
+  &:focus-visible {
+    outline-color: $logo-outline-color;
+  }
+}
+
+.img {
+  width: 100%;
+}

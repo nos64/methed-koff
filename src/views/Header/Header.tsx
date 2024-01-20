@@ -1,7 +1,7 @@
 import Container from '../Container';
 
 import Logo from '../../components/Logo';
-import Search from '../../components/Search';
+import SearchForm from '../../components/SearchForm';
 import Navigation from '../../components/Navigation';
 
 import styles from './Header.module.scss';
@@ -12,9 +12,11 @@ const Header = () => (
       <div className={styles.logo}>
         <Logo />
       </div>
+
       <div className={styles.search}>
-        <Search />
+        <SearchForm />
       </div>
+
       <div className={styles.navigation}>
         <Navigation />
       </div>

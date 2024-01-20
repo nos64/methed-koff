@@ -1,0 +1,50 @@
+@import './SearchForm.vars.scss';
+
+.form {
+  position: relative;
+  width: 100%;
+  height: 38px;
+
+  .input {
+    width: 100%;
+    height: 100%;
+    padding: 11px 24px;
+    border-radius: 32px;
+    border: 1px solid transparent;
+    background-color: $search-form-background-color;
+    outline: none;
+
+    &::placeholder {
+      color: $search-form-placeholder-color;
+    }
+
+    &:focus-visible,
+    &:hover {
+      border-color: $search-form-border-color-focus;
+    }
+  }
+
+  .button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 24px;
+    width: 16px;
+    height: 16px;
+    display: block;
+    outline-offset: 4px;
+    outline: 1px solid transparent;
+    border-radius: 4px;
+
+    &:hover,
+    &:active {
+      color: $search-form-search-button-outline-color;
+    }
+
+    &:focus-visible {
+      color: $search-form-search-button-outline-color;
+      outline-color: $search-form-search-button-outline-color;
+    }
+  }
+}
+

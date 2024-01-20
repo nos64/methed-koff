@@ -1,28 +1,57 @@
+@import './Footer.vars.scss';
+
+.footer {
+  background-color: $footer-bg-color;
+  color: $footer-text-color;
+  padding-top: 32px;
+  padding-bottom: 40px;
+
+  @media (min-width: 820px) {
+    padding-top: 40px;
+  }
+}
+
 .container {
-  display: grid;
-  gap: 24px;
+  display: flex;
   flex-direction: column;
-  grid-template-areas:
-    "logo"
-    "contacts"
-    "developer";
+  gap: 24px;
 
   @media (min-width: 580px) {
-    grid-template-areas:
-      "logo contacts"
-      "developer";
+    display: grid;
     grid-template-columns: 1fr 1fr;
   }
 
-  .logo {
-    grid-area: logo;
+  @media (min-width: 820px) {
+    gap: 32px;
+  }
+}
+
+.logo {
+  width: 230px;
+
+  @media (min-width: 580px) {
+    grid-column: 1 / 2;
   }
 
-  .contacts {
-    grid-area: search;
+  @media (min-width: 820px) {
+    width: 330px;
   }
+}
 
-  .developer {
-    grid-area: navigation;
+.contacts {
+  @media (min-width: 580px) {
+    grid-column: 2 / 3;
+  }
+}
+
+.developer {
+  @media (min-width: 580px) {
+    grid-column: 1 / 2;
+  }
+}
+
+.copyright {
+  @media (min-width: 580px) {
+    grid-column: 1 / 2;
   }
 }

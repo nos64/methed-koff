@@ -1,0 +1,38 @@
+@import './Navigation.vars.scss';
+
+.navigation {
+  display: flex;
+  gap: 16px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-direction: row-reverse;
+  outline-offset: 4px;
+
+  @media (min-width: 580px) {
+    flex-direction: row;
+  }
+
+  &:hover,
+  &:active {
+    color: $navigation-button-color-hover;
+  }
+
+  &:focus-visible {
+    color: $navigation-button-color-hover;
+    outline-color: $navigation-button-color-hover;
+  }
+}
+
+.text {
+  position: fixed;
+  transform: scale(0);
+
+  @media (min-width: 580px) {
+    position: unset;
+    transform: scale(1);
+  }
+}
