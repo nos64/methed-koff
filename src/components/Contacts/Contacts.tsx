@@ -1,8 +1,10 @@
 import styles from './Contacts.module.scss';
 
 const Contacts = () => (
-  <div>
-    <a className={styles.phone} href='tel:+7 (939) 839 12 97'>
+  <div className={styles.contacts}>
+    <a
+      className={`${styles.phone} ${styles.link}`}
+      href='tel:+7 (939) 839 12 97'>
       <svg
         width='16'
         height='16'

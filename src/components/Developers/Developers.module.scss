@@ -7,6 +7,9 @@
 }
 
 .link {
+  outline: 1px solid transparent;
+  border-radius: 4px; 
+
   &:hover,
   &:active {
     color: $developers-link-outline-color;

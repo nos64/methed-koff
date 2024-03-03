@@ -1,11 +1,10 @@
-import React from 'react';
+import Goods from '../../components/Goods';
 
-const Main = () => {
-  return (
-    <main>
-      
-    </main>
-  );
-};
+const Main = () => (
+  <main>
+    {/* <Catalog/> */}
+    <Goods />
+  </main>
+);
 
 export default Main;

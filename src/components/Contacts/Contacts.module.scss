@@ -1,4 +1,11 @@
 @import './Contacts.vars.scss';
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
 .phone {
   display: flex;
   gap: 4px;
@@ -11,6 +18,9 @@
 }
 
 .link {
+  outline: 1px solid transparent;
+  border-radius: 4px; 
+
   &:hover,
   &:active {
     color: $contacts-link-outline-color;
@@ -21,5 +31,3 @@
     outline-color: $contacts-link-outline-color;
   }
 }
-
-//second lesson 1:11

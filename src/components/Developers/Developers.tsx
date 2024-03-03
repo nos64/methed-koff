@@ -19,7 +19,7 @@ const Developers = () => (
         href='https://t.me/ziglobe'
         target='_blank'
         rel='noreferrer'>
-        Miknail Nosov
+        Mikhail Nosov
       </a>
     </li>
   </ul>

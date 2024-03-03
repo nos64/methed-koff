@@ -38,14 +38,23 @@ html {
 
 body {
   position: relative;
-  min-width: 320px;
-  min-height: 100vh;
   font-family: $body-font-family;
   color: $body-font-color;
   font-size: $body-font-size;
   font-weight: $body-font-weight;
   line-height: $body-line-height;
   background: $body-background-color;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
 }
 
 img,
