@@ -5,25 +5,26 @@ import Catalog from '../../components/Catalog';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCategories } from '../../store/categories/categoriesSlice';
+import { fetchProducts } from '../../store/products/productsSlice';
 
 const Main = () => {
   const dispatch = useAppDispatch();
+
   const {
-    data: dataCategories,
-    loading: loadingCategories,
-    error: errorCategories,
-  } = useAppSelector((store) => store.categories);
+    data: dataProducts,
+    loading: loadingProducts,
+    error: errorProducts,
+  } = useAppSelector((store) => store.products);
 
   useEffect(() => {
     dispatch(fetchCategories());
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   return (
     <main>
-      {loadingCategories && <div>Загрузка</div>}
-      {errorCategories && <div>Ошибка: {errorCategories}</div>}
-      <Catalog data={dataCategories} />
-      <Goods />
+      <Catalog />
+      <Goods data={dataProducts} />
     </main>
   );
 };

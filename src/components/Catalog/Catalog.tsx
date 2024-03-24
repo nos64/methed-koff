@@ -1,16 +1,19 @@
+import { useAppSelector } from '../../hooks';
+
 import Container from '../../views/Container';
 
 import styles from './Catalog.module.scss';
 
-interface CatalogProps {
-  data: string[];
-}
+const Catalog = () => {
+  const { data, loading, error } = useAppSelector((store) => store.categories);
 
-const Catalog = (props: CatalogProps) => {
-  const { data } = props;
   return (
     <nav className={styles.catalog}>
       <Container className={styles.container}>
+        {loading && <div>Категории загружаются</div>}
+
+        {error && <div>Ошибка: {error}</div>}
+
         <ul className={styles.list}>
           {data.map((elem, index) => (
             <li className={styles.item} key={index}>

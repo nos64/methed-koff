@@ -20,7 +20,7 @@ const App = () => {
   return (
     <>
       <Header />
-      {!loading && accessKey ? <Main /> : 'Загрузка'}
+      {!loading && accessKey ? <Main /> : <div>'Загрузка...'</div>}
       <Footer />
     </>
   );
