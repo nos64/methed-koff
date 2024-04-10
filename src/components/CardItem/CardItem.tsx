@@ -14,12 +14,12 @@ const CardItem = (props: Product) => {
 
   return (
     <article className={styles.card}>
-      <Link className={styles.link} to={`/product/${id}`}>
+      <Link className={styles.link} to={`/products/${id}`}>
         <img className={styles.img} src={`${API_URL}${image}`} alt={name} />
       </Link>
       <div className={styles.info}>
         <h3 className={styles.title}>
-          <Link className={styles.link} to={`/product/${id}`}>
+          <Link className={styles.link} to={`/products/${id}`}>
             {name}
           </Link>
         </h3>

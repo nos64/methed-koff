@@ -22,24 +22,27 @@ type ProductState = {
 
 export const fetchProduct = createAsyncThunk<
   Product,
-  void,
+  string,
   { rejectValue: string; state: RootState }
->('products/fetchProduct', async (_, { getState, rejectWithValue }) => {
-  const state = getState();
-  const token = state.auth.accessKey;
+>(
+  'product/fetchProduct',
+  async (productId: string, { getState, rejectWithValue }) => {
+    const state = getState();
+    const token = state.auth.accessKey;
 
-  const response = await fetch(`${API_URL}api/products/:id`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+    const response = await fetch(`${API_URL}api/products/${productId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-  if (!response.ok) {
-    return rejectWithValue('Не удалось получить информацию о товаре');
-  }
+    if (!response.ok) {
+      return rejectWithValue('Не удалось получить информацию о товаре');
+    }
 
-  return response.json();
-});
+    return response.json();
+  },
+);
 
 const initialState: ProductState = {
   data: null,
