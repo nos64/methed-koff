@@ -1,6 +1,8 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import type { RootState } from '../index';
+
+import { API_URL } from '../../constants';
 
 export interface Product {
   article: string;
@@ -19,14 +21,14 @@ type ProductsState = {
 };
 
 export const fetchProducts = createAsyncThunk<
-  object[],
+  Product[],
   void,
   { rejectValue: string; state: RootState }
 >('products/fetchProducts', async (_, { getState, rejectWithValue }) => {
   const state = getState();
   const token = state.auth.accessKey;
 
-  const response = await fetch('https://koff-api.vercel.app/api/products', {
+  const response = await fetch(`${API_URL}api/products`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -55,14 +57,11 @@ const productsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(
-        fetchProducts.fulfilled,
-        (state, action: PayloadAction<object[]>) => {
-          state.data = action.payload;
-          state.loading = false;
-          state.error = null;
-        },
-      )
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
         if (action.error.message) {

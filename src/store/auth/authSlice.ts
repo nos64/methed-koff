@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { API_URL } from '../../constants';
+
 type AuthState = {
   accessKey: string | null;
   loading: boolean;
@@ -11,9 +13,7 @@ export const fetchAccessKey = createAsyncThunk<
   undefined,
   { rejectValue: string }
 >('auth/fetchAccessKey', async (_, { rejectWithValue }) => {
-  const response = await fetch(
-    'https://koff-api.vercel.app/api/users/accessKey',
-  );
+  const response = await fetch(`${API_URL}api/users/accessKey`);
 
   if (!response.ok) {
     return rejectWithValue('Не удалось получить токен доступа');
