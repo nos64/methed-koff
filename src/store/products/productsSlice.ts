@@ -20,10 +20,15 @@ type ProductsState = {
   error: string | null;
 };
 
+type RejectWithValue = {
+  status: number;
+  error: string;
+};
+
 export const fetchProducts = createAsyncThunk<
   Product[],
   void,
-  { rejectValue: string; state: RootState }
+  { rejectValue: RejectWithValue | string; state: RootState }
 >('products/fetchProducts', async (_, { getState, rejectWithValue }) => {
   const state = getState();
   const token = state.auth.accessKey;
@@ -35,6 +40,13 @@ export const fetchProducts = createAsyncThunk<
   });
 
   if (!response.ok) {
+    if (response.status === 401) {
+      return rejectWithValue({
+        status: response.status,
+        error: 'Не удалось получить список товаров',
+      });
+    }
+
     return rejectWithValue('Не удалось получить список товаров');
   }
 
@@ -64,8 +76,11 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
-        if (action.error.message) {
-          state.error = action.error.message;
+        if (action.payload && typeof action.payload === 'object') {
+          state.error = action.payload.error;
+        } else {
+          state.error =
+            action.error.message || 'Не удалось получить список товаров';
         }
       });
   },

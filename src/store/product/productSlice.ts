@@ -20,10 +20,15 @@ type ProductState = {
   error: string | null;
 };
 
+type RejectWithValue = {
+  status: number;
+  error: string;
+};
+
 export const fetchProduct = createAsyncThunk<
   Product,
   string,
-  { rejectValue: string; state: RootState }
+  { rejectValue: RejectWithValue | string; state: RootState }
 >(
   'product/fetchProduct',
   async (productId: string, { getState, rejectWithValue }) => {
@@ -37,6 +42,13 @@ export const fetchProduct = createAsyncThunk<
     });
 
     if (!response.ok) {
+      if (response.status === 401) {
+        return rejectWithValue({
+          status: response.status,
+          error: 'Не удалось получить информацию о товаре',
+        });
+      }
+
       return rejectWithValue('Не удалось получить информацию о товаре');
     }
 
@@ -67,8 +79,11 @@ const productSlice = createSlice({
       })
       .addCase(fetchProduct.rejected, (state, action) => {
         state.loading = false;
-        if (action.error.message) {
-          state.error = action.error.message;
+        if (action.payload && typeof action.payload === 'object') {
+          state.error = action.payload.error;
+        } else {
+          state.error =
+            action.error.message || 'Не удалось получить информацию о товаре';
         }
       });
   },

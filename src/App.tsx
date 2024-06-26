@@ -87,7 +87,7 @@ const App = () => {
   }, [dispatch, accessKey]);
 
   if (loading) {
-    return <div>Загрузка</div>;
+    return <div>Загрузка...</div>;
   }
 
   return <RouterProvider router={router} />;

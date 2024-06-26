@@ -10,10 +10,15 @@ type CategoriesState = {
   error: string | null;
 };
 
+type RejectWithValue = {
+  status: number;
+  error: string;
+};
+
 export const fetchCategories = createAsyncThunk<
   string[],
   void,
-  { rejectValue: string; state: RootState }
+  { rejectValue: RejectWithValue | string; state: RootState }
 >('categories/fetchCategories', async (_, { getState, rejectWithValue }) => {
   const state = getState();
   const token = state.auth.accessKey;
@@ -25,6 +30,13 @@ export const fetchCategories = createAsyncThunk<
   });
 
   if (!response.ok) {
+    if (response.status === 401) {
+      return rejectWithValue({
+        status: response.status,
+        error: 'Не удалось получить каталог',
+      });
+    }
+
     return rejectWithValue('Не удалось получить каталог');
   }
 
@@ -57,8 +69,10 @@ const categoriesSlice = createSlice({
       )
       .addCase(fetchCategories.rejected, (state, action) => {
         state.loading = false;
-        if (action.error.message) {
-          state.error = action.error.message;
+        if (action.payload && typeof action.payload === 'object') {
+          state.error = action.payload.error;
+        } else {
+          state.error = action.error.message || 'Не удалось получить каталог';
         }
       });
   },

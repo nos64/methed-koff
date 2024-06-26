@@ -15,6 +15,7 @@ import authReducer from './auth/authSlice';
 import categoriesReducer from './categories/categoriesSlice';
 import productsReducer from './products/productsSlice';
 import productReducer from './product/productSlice';
+import { apiTokenErrorMiddleware } from './middleware';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -38,11 +39,11 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(apiTokenErrorMiddleware),
 });
 
 export const persistor = persistStore(store);
 export default store;
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
